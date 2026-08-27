@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<title>StoreWise</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+<div class="logo">Store<span>Wise</span></div>
+
+<button class="nav-btn active-nav" onclick="showPage('dashboard',this)"><h0>Dashboard</h0></button>
+<button class="nav-btn" onclick="showPage('inventory',this)"><h0>Inventory</h0></button>
+<button class="nav-btn" onclick="showPage('sales',this)"><h0>Sales</h0></button>
+<button class="nav-btn" onclick="showPage('reports',this)"><h0>Report</h0></button>
+</div>
+
+<div class="main">
+
+<div class="welcome">
+    <h1>Good Morning 👋</h1>
+    <p>Welcome to your shop</p>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="page active">
+
+    <h1>Dashboard</h1>
+
+    <!-- MAIN STAT CARDS -->
+    <div class="cards dashboard-cards">
+
+        <div class="card dashboard-card">
+            <p>Total Products</p>
+            <h2 id="totalProducts">0</h2>
+            <span class="card-label">Products in store</span>
+        </div>
+
+        <div class="card dashboard-card">
+            <p>Total Stock</p>
+            <h2 id="totalStock">0</h2>
+            <span class="card-label">Items in inventory</span>
+        </div>
+
+        <div class="card dashboard-card">
+            <p>Stock Value</p>
+            <h2 id="stockValue">₹0</h2>
+            <span class="card-label">Current inventory value</span>
+        </div>
+
+        <div class="card dashboard-card">
+            <p>Total Sales</p>
+            <h2 id="totalSales">0</h2>
+            <span class="card-label">Sales recorded</span>
+        </div>
+
+    </div>
+
+
+    <!-- TODAY'S STATS -->
+    <div class="dashboard-grid">
+
+        <div class="dashboard-box">
+
+            <div class="box-title">
+                <div>
+                    <h2>Today's Revenue</h2>
+                    <p>Sales made today</p>
+                </div>
+
+                <div class="box-icon revenue-icon">
+                    $
+                </div>
+            </div>
+
+            <h3 id="todayRevenue">₹0</h3>
+
+        </div>
+
+
+        <div class="dashboard-box">
+
+            <div class="box-title">
+                <div>
+                    <h2>Today's Profit</h2>
+                    <p>Profit earned today</p>
+                </div>
+
+                <div class="box-icon profit-icon">
+                    ↗
+                </div>
+            </div>
+
+            <h3 id="todayProfit">₹0</h3>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="quick-actions">
+
+        <h2>Quick Actions</h2>
+
+        <div class="quick-action-buttons">
+
+            <button onclick="openInventory()">
+                <span>＋</span>
+                Add Product
+            </button>
+
+            <button onclick="openSales()">
+                <span>🛒</span>
+                Record Sale
+            </button>
+
+            <button onclick="openInventory()">
+                <span>＋</span>
+                Add Stock
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOWER DASHBOARD -->
+
+    <div class="dashboard-columns">
+
+
+        <!-- LOW STOCK -->
+
+        <div class="dashboard-box">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Low Stock</h2>
+                    <p>Products that need restocking</p>
+                </div>
+
+                <span class="warning-badge">⚠</span>
+
+            </div>
+
+            <div id="lowStockList" class="dashboard-list"></div>
+
+        </div>
+
+
+        <!-- BEST SELLING -->
+
+        <div class="dashboard-box">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Best Selling</h2>
+                    <p>Your top selling products</p>
+                </div>
+
+                <span class="best-badge">★</span>
+
+            </div>
+
+            <div id="bestSellingList" class="dashboard-list"></div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- RECENT SALES -->
+
+    <div class="dashboard-box recent-sales-box">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Recent Sales</h2>
+                <p>Latest transactions</p>
+            </div>
+
+            <button class="view-sales-btn" onclick="openSales()">
+                View Sales →
+            </button>
+
+        </div>
+
+        <div id="recentSalesList" class="recent-sales-list"></div>
+
+    </div>
+
+
+</div>
+
+<!-- INVENTORY -->
+<div id="inventory" class="page">
+
+<h1>Inventory</h1>
+
+<div class="form">
+<input id="name" placeholder="Product Name">
+<div class="price-row">
+
+    <div class="price-input">
+        <label>Cost Price (CP)</label>
+
+        <div class="price-field">
+            <span>₹</span>
+            <input
+                id="cost"
+                type="number"
+                placeholder="Cost"
+                min="0"
+                step="0.01"
+            >
+            <small id="costUnit">/ pcs</small>
+        </div>
+    </div>
+
+
+    <div class="price-input">
+        <label>Selling Price (SP)</label>
+
+        <div class="price-field">
+            <span>₹</span>
+            <input
+                id="sell"
+                type="number"
+                placeholder="Selling Price"
+                min="0"
+                step="0.01"
+            >
+            <small id="sellUnit">/ pcs</small>
+        </div>
+    </div>
+
+</div>
+<div class="quantity-row">
+
+    <input id="qty" type="number" placeholder="Quantity" min="0">
+
+    <select id="unit" onchange="updatePriceUnits()">
+    <option value="pcs">Pieces</option>
+    <option value="kg">Kilogram (kg)</option>
+    <option value="g">Gram (g)</option>
+    <option value="L">Liter (L)</option>
+    <option value="ml">Milliliter (ml)</option>
+    <option value="dozen">Dozen</option>
+</select>
+
+</div>
+
+<button class="add" onclick="addProduct()">Add Product</button>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Cost Price</th>
+<th>Selling Price</th>
+<th>Quantity</th>
+<th></th>
+</tr>
+</thead>
+
+<tbody id="productTable"></tbody>
+</table>
+
+</div>
+
+<!-- SALES -->
+<div id="sales" class="page">
+
+<h1>Sales</h1>
+
+<div class="form">
+<select id="saleProduct"></select>
+<input id="saleQty" type="number" placeholder="Quantity Sold">
+<div class="discount-row">
+
+    <input
+        id="saleDiscount"
+        type="number"
+        placeholder="Discount"
+        min="0"
+    >
+
+    <select id="discountType">
+        <option value="percent">Percentage (%)</option>
+        <option value="fixed">Fixed (₹)</option>
+    </select>
+
+</div>
+<button class="add" onclick="recordSale()">Record Sale</button>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Amount</th>
+<th>Discount</th>
+<th>Profit</th>
+<th>Qty</th>
+<th></th>
+</tr>
+</thead>
+
+<tbody id="salesTable"></tbody>
+</table>
+
+</div>
+
+<!-- REPORTS -->
+<div id="reports" class="page">
+
+<h1>Reports</h1>
+
+<div class="cards">
+
+<div class="card">
+<p>Revenue</p>
+<h2 id="revenue">₹0</h2>
+</div>
+
+<div class="card">
+<p>Profit</p>
+<h2 id="profit">₹0</h2>
+</div>
+
+<div class="card">
+<p>Total Sales</p>
+<h2 id="salesCount">0</h2>
+</div>
+
+</div>
+
+<div class="chart-box">
+    <h2>Graph Report</h2>
+<canvas id="reportChart"></canvas>
+</div>
+
+</div>
+
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

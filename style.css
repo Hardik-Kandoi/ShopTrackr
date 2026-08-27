@@ -1,0 +1,1314 @@
+/* ================================
+   GLOBAL
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Times New Roman", Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #0b1120;
+    color: #f8fafc;
+    min-height: 100vh;
+}
+
+
+/* ================================
+   MAIN LAYOUT
+================================ */
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* ================================
+   SIDEBAR
+================================ */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background: #111827;
+    padding: 24px 18px;
+    border-right: 1px solid #1f2937;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 35px;
+    padding-left: 8px;
+}
+
+.logo span {
+    color: #6366f1;
+}
+
+
+/* Navigation */
+
+.nav-btn {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    margin-bottom: 10px;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    background: transparent;
+    color: #94a3b8;
+
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    text-align: left;
+}
+
+.nav-btn:hover {
+    background: #1e293b;
+    color: white;
+    transform: translateX(3px);
+}
+
+.active-nav {
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #4f46e5
+    );
+
+    color: white;
+
+    box-shadow:
+        0 8px 20px rgba(99, 102, 241, 0.25);
+}
+
+.sidebar h0 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+/* ================================
+   MAIN
+================================ */
+
+.main {
+    flex: 1;
+    padding: 28px;
+    overflow: auto;
+    max-width: 1600px;
+}
+
+
+/* ================================
+   WELCOME HEADER
+================================ */
+
+.welcome {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(99, 102, 241, 0.18),
+            rgba(30, 41, 59, 0.8)
+        );
+
+    padding: 25px 28px;
+
+    border: 1px solid #263247;
+    border-radius: 18px;
+
+    margin-bottom: 28px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.welcome h1 {
+    color: white;
+    font-weight: 700;
+    font-size: 26px;
+    margin-bottom: 6px;
+}
+
+.welcome p {
+    color: #94a3b8;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+
+/* ================================
+   PAGE
+================================ */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.page > h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    letter-spacing: -0.5px;
+}
+
+
+/* ================================
+   DASHBOARD CARDS
+================================ */
+
+.cards {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(210px, 1fr));
+
+    gap: 18px;
+    margin-top: 22px;
+}
+
+.card {
+    position: relative;
+
+    background: #111c2f;
+
+    padding: 22px;
+
+    border-radius: 16px;
+
+    border: 1px solid #243147;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 70px;
+    height: 70px;
+
+    right: -20px;
+    top: -20px;
+
+    background: rgba(99, 102, 241, 0.12);
+
+    border-radius: 50%;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+
+    border-color: #3b4a67;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+.card p {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.card h2 {
+    margin-top: 10px;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #f8fafc;
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.form {
+    background: #111c2f;
+
+    padding: 22px;
+
+    border-radius: 16px;
+
+    margin-top: 22px;
+
+    border: 1px solid #243147;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ================================
+   INPUTS & SELECT
+================================ */
+
+input,
+select {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    margin-top: 10px;
+
+    border: 1px solid #334155;
+
+    border-radius: 10px;
+
+    background: #0f172a;
+
+    color: white;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+input::placeholder {
+    color: #64748b;
+}
+
+input:focus,
+select:focus {
+    border-color: #6366f1;
+
+    background: #111827;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+select {
+    cursor: pointer;
+}
+
+
+/* ================================
+   ADD / PRIMARY BUTTON
+================================ */
+
+.add {
+    width: 100%;
+
+    padding: 13px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #4f46e5
+    );
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.add:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(99, 102, 241, 0.25);
+}
+
+.add:active {
+    transform: translateY(0);
+}
+
+
+/* ================================
+   TABLE
+================================ */
+
+table {
+    width: 100%;
+
+    margin-top: 22px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    overflow: hidden;
+
+    background: #111c2f;
+
+    border: 1px solid #243147;
+
+    border-radius: 16px;
+}
+
+thead {
+    background: #172238;
+}
+
+th {
+    padding: 16px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #94a3b8;
+
+    border-bottom: 1px solid #29364b;
+
+    text-align: left;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 16px;
+
+    font-size: 16px;
+
+    color: #e2e8f0;
+
+    border-bottom: 1px solid #202c40;
+
+    text-align: left;
+}
+
+tbody tr {
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: #162238;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ================================
+   ACTION BUTTONS
+================================ */
+
+.action-buttons {
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+
+/* Stock */
+
+.stock-btn {
+    background: #2563eb;
+
+    border: none;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.stock-btn:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+.quantity-row {
+    display: flex;
+    gap: 10px;
+}
+
+.quantity-row input {
+    flex: 2;
+}
+
+.quantity-row select {
+    flex: 1;
+}
+
+@media (max-width: 500px) {
+
+    .quantity-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+}
+
+.price-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+}
+
+.price-input label {
+    display: block;
+
+    font-size: 13px;
+
+    color: #94a3b8;
+
+    margin-top: 10px;
+
+    margin-bottom: 6px;
+}
+
+.price-field {
+    display: flex;
+
+    align-items: center;
+
+    background: #0f172a;
+
+    border: 1px solid #334155;
+
+    border-radius: 10px;
+
+    padding: 0 12px;
+
+    transition: 0.2s;
+}
+
+.price-field:focus-within {
+    border-color: #6366f1;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.price-field span {
+    color: #94a3b8;
+
+    font-size: 15px;
+
+    margin-right: 6px;
+}
+
+.price-field input {
+    margin: 0;
+
+    border: none;
+
+    background: transparent;
+
+    box-shadow: none;
+
+    flex: 1;
+}
+
+.price-field input:focus {
+    box-shadow: none;
+}
+
+.price-field small {
+    color: #64748b;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+
+@media (max-width: 600px) {
+
+    .price-row {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* Sell */
+
+.sell {
+    background: #16a34a;
+
+    color: white;
+
+    border: none;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.sell:hover {
+    background: #15803d;
+
+    transform: translateY(-1px);
+}
+
+.discount-row {
+    display: flex;
+    gap: 10px;
+}
+
+.discount-row input {
+    flex: 2;
+}
+
+.discount-row select {
+    flex: 1;
+}
+
+@media (max-width: 500px) {
+
+    .discount-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+}
+
+
+/* Delete */
+
+.delete {
+    background: #dc2626;
+
+    color: white;
+
+    border: none;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    margin-right: 5px;
+
+    transition: 0.2s;
+}
+
+.delete:hover {
+    background: #b91c1c;
+
+    transform: translateY(-1px);
+}
+
+
+/* ================================
+   CHART
+================================ */
+
+.chart-box {
+
+    background: #1e293b;
+
+    padding: 20px;
+
+    height: 450px;
+
+    margin-top: 20px;
+
+    border-radius: 15px;
+
+    border: 1px solid #243147;
+}
+
+.chart-box h2 {
+
+    margin-bottom: 15px;
+
+    font-size: 20px;
+
+    color: #f8fafc;
+}
+
+canvas {
+
+    background: #f8fafc;
+
+    border-radius: 12px;
+
+    padding: 10px;
+
+    width: 100% !important;
+
+    height: 350px !important;
+
+    cursor: default;
+}
+
+
+/* ================================
+   SCROLLBAR
+================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0b1120;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main {
+        padding: 20px;
+    }
+
+    .cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* ================================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 768px) {
+
+    .container {
+        display: block;
+    }
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+        height: auto;
+        min-height: auto;
+
+        padding: 15px;
+
+        border-right: none;
+        border-bottom: 1px solid #1f2937;
+    }
+
+    .logo {
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .nav-btn {
+        width: calc(50% - 5px);
+
+        display: inline-block;
+
+        margin-right: 5px;
+        margin-bottom: 8px;
+
+        height: 45px;
+
+        text-align: center;
+    }
+
+    .main {
+        padding: 15px;
+    }
+
+    .welcome {
+        padding: 20px;
+    }
+
+    .welcome h1 {
+        font-size: 22px;
+    }
+
+    .page > h1 {
+        font-size: 24px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    /*
+       Make tables horizontally scrollable
+       on small screens.
+    */
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+}
+
+
+/* ================================
+   VERY SMALL SCREENS
+================================ */
+
+@media (max-width: 450px) {
+
+    .nav-btn {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .form {
+        padding: 16px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    th,
+    td {
+        padding: 12px;
+    }
+
+}
+
+/* =========================================
+   MODERN DASHBOARD
+========================================= */
+
+.dashboard-cards {
+    margin-bottom: 20px;
+}
+
+.dashboard-card {
+    min-height: 150px;
+}
+
+.card-label {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   DASHBOARD GRID
+========================================= */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+    margin-top: 18px;
+}
+
+
+.dashboard-box {
+    background: #111c2f;
+
+    border: 1px solid #243147;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.12);
+
+    transition: 0.25s ease;
+}
+
+.dashboard-box:hover {
+    border-color: #34445f;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   BOX TITLE
+========================================= */
+
+.box-title {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.box-title h2 {
+    font-size: 17px;
+
+    color: #f8fafc;
+
+    margin-bottom: 5px;
+}
+
+.box-title p {
+    font-size: 12px;
+
+    color: #64748b;
+}
+
+.dashboard-box h3 {
+    font-size: 32px;
+
+    margin-top: 18px;
+
+    color: #f8fafc;
+}
+
+
+/* =========================================
+   ICONS
+========================================= */
+
+.box-icon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+.revenue-icon {
+    background: rgba(99, 102, 241, 0.15);
+
+    color: #818cf8;
+}
+
+.profit-icon {
+    background: rgba(34, 197, 94, 0.15);
+
+    color: #4ade80;
+}
+
+
+/* =========================================
+   QUICK ACTIONS
+========================================= */
+
+.quick-actions {
+    background: #111c2f;
+
+    border: 1px solid #243147;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    margin-top: 18px;
+}
+
+.quick-actions h2 {
+    font-size: 18px;
+
+    margin-bottom: 15px;
+}
+
+.quick-action-buttons {
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.quick-action-buttons button {
+    border: 1px solid #334155;
+
+    background: #172238;
+
+    color: #e2e8f0;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.quick-action-buttons button:hover {
+    background: #6366f1;
+
+    border-color: #6366f1;
+
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+.quick-action-buttons span {
+    margin-right: 6px;
+}
+
+
+/* =========================================
+   TWO COLUMN SECTION
+========================================= */
+
+.dashboard-columns {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+    margin-top: 18px;
+}
+
+
+/* =========================================
+   SECTION HEADING
+========================================= */
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+    font-size: 18px;
+
+    margin-bottom: 4px;
+}
+
+.section-heading p {
+    font-size: 12px;
+
+    color: #64748b;
+}
+
+
+/* =========================================
+   BADGES
+========================================= */
+
+.warning-badge,
+.best-badge {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+.warning-badge {
+    background: rgba(239, 68, 68, 0.12);
+
+    color: #f87171;
+}
+
+.best-badge {
+    background: rgba(250, 204, 21, 0.12);
+
+    color: #facc15;
+}
+
+
+/* =========================================
+   DASHBOARD LIST
+========================================= */
+
+.dashboard-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.dashboard-list-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 12px;
+
+    background: #0f172a;
+
+    border: 1px solid #1e293b;
+
+    border-radius: 10px;
+}
+
+.item-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.item-number {
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #1e293b;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.item-name {
+    font-size: 13px;
+
+    color: #e2e8f0;
+
+    font-weight: 600;
+}
+
+.item-value {
+    font-size: 12px;
+
+    color: #94a3b8;
+}
+
+
+/* LOW STOCK */
+
+.low-stock-value {
+    color: #f87171;
+
+    font-weight: 600;
+}
+
+
+/* BEST SELLING */
+
+.best-selling-value {
+    color: #4ade80;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   RECENT SALES
+========================================= */
+
+.recent-sales-box {
+    margin-top: 18px;
+}
+
+.view-sales-btn {
+    border: none;
+
+    background: transparent;
+
+    color: #818cf8;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.view-sales-btn:hover {
+    color: #a5b4fc;
+}
+
+
+.recent-sale {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 14px 5px;
+
+    border-bottom: 1px solid #1e293b;
+}
+
+.recent-sale:last-child {
+    border-bottom: none;
+}
+
+.recent-sale-name {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #e2e8f0;
+}
+
+.recent-sale-qty {
+    font-size: 11px;
+
+    color: #64748b;
+
+    margin-top: 3px;
+}
+
+.recent-sale-amount {
+    color: #4ade80;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.dashboard-empty {
+    text-align: center;
+
+    padding: 20px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .dashboard-columns {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-action-buttons {
+        flex-direction: column;
+    }
+
+    .quick-action-buttons button {
+        width: 100%;
+    }
+
+}
