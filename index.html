@@ -247,19 +247,25 @@
     </div>
 
 </div>
-<div class="quantity-row">
 
-    <input id="qty" type="number" placeholder="Quantity" min="0">
+<div class="price-input">
 
-    <select id="unit" onchange="updatePriceUnits()">
-    <option value="pcs">Pieces</option>
-    <option value="kg">Kilogram (kg)</option>
-    <option value="g">Gram (g)</option>
-    <option value="L">Liter (L)</option>
-    <option value="ml">Milliliter (ml)</option>
-    <option value="dozen">Dozen</option>
-</select>
+    <label>Total Quantity of Stuff</label>
 
+    <div class="quantity-row">
+
+        <input id="qty" type="number" placeholder="Quantity" min="0">
+
+        <select id="unit" onchange="updatePriceUnits()">
+        <option value="pcs">Pieces</option>
+        <option value="kg">Kilogram (kg)</option>
+        <option value="g">Gram (g)</option>
+        <option value="L">Liter (L)</option>
+        <option value="ml">Milliliter (ml)</option>
+        <option value="dozen">Dozen</option>
+    </select>
+
+    </div>
 </div>
 
 <button class="add" onclick="addProduct()">Add Product</button>
