@@ -14,6 +14,11 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Fonts: Space Grotesk (display/numerals) + Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Existing CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -39,50 +44,66 @@
 
             <button class="nav-btn active-nav"
                 onclick="showPage('dashboard', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
                 <span>Dashboard</span>
             </button>
 
             <button class="nav-btn"
                 onclick="showPage('inventory', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
                 <span>Inventory</span>
             </button>
 
             <button class="nav-btn"
                 onclick="showPage('sales', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.5l2.6 12.2a2 2 0 0 0 2 1.6h8a2 2 0 0 0 2-1.6L21 7H6"/></svg>
                 <span>Sales</span>
             </button>
 
             <button class="nav-btn"
                 onclick="showPage('purchases', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h11v8H2z"/><path d="M13 11h4l4 3v2h-8z"/><circle cx="6.5" cy="18.5" r="1.6"/><circle cx="17" cy="18.5" r="1.6"/></svg>
                 <span>Purchases</span>
             </button>
 
             <button class="nav-btn"
                 onclick="showPage('suppliers', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 11a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z"/><path d="M2.5 20v-1.5A4.5 4.5 0 0 1 7 14h3a4.5 4.5 0 0 1 4.5 4.5V20"/><path d="M15.5 5a3.2 3.2 0 0 1 0 6.4"/><path d="M17 14.2a4.5 4.5 0 0 1 4.5 4.3V20"/></svg>
                 <span>Suppliers</span>
             </button>
 
             <button class="nav-btn"
                 onclick="showPage('expenses', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l4 4v16H6z"/><path d="M15 2v4h4"/><path d="M9 12h6M9 16h6M9 8h2"/></svg>
                 <span>Expenses</span>
             </button>
 
             <button class="nav-btn"
                 onclick="showPage('reports', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/><path d="M2.5 20h19"/></svg>
                 <span>Reports</span>
             </button>
 
             <button class="nav-btn"
                 onclick="showPage('invoices', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2h8l4 4v16H7z"/><path d="M15 2v4h4"/><path d="M10 12h5M10 16h5"/><circle cx="9" cy="12.3" r=".2"/></svg>
                 <span>Invoices</span>
             </button>
 
             <button class="nav-btn"
                 onclick="showPage('backup', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17a4.5 4.5 0 0 1-.6-8.96A5.5 5.5 0 0 1 17 10a4 4 0 0 1 .3 8H7Z"/><path d="M12 12v6M9.5 15.5 12 18l2.5-2.5"/></svg>
                 <span>Backup & Data</span>
             </button>
 
         </nav>
+
+        <div class="sidebar-footer">
+            <button type="button" class="theme-toggle" id="themeToggleBtn" onclick="toggleShopTrackrTheme()">
+                <span id="themeToggleLabel">Dark mode</span>
+                <span class="track"></span>
+            </button>
+        </div>
 
     </aside>
 
@@ -99,11 +120,18 @@
 
         <div class="welcome">
 
-            <h1>Good Morning 👋</h1>
+            <div>
+                <h1 id="welcomeGreeting">Good Morning 👋</h1>
 
-            <p>
-                Welcome back to your shop
-            </p>
+                <p>
+                    Welcome back to your shop
+                </p>
+            </div>
+
+            <div class="welcome-meta">
+                <span id="welcomeDate">—</span>
+                <strong id="welcomeClock">--:--</strong>
+            </div>
 
         </div>
 
@@ -2682,6 +2710,69 @@
 </div>
 
 
+
+<!-- =========================================================
+     UI ENHANCEMENTS (theme toggle + live clock)
+     Self-contained — does not touch or depend on script.js
+========================================================== -->
+
+<script>
+(function () {
+    var root = document.documentElement;
+    var STORAGE_KEY = "shoptrackr-theme";
+
+    function applyTheme(theme) {
+        var isDark = theme === "dark";
+        root.classList.toggle("dark", isDark);
+        var label = document.getElementById("themeToggleLabel");
+        if (label) label.textContent = isDark ? "Light mode" : "Dark mode";
+    }
+
+    function initTheme() {
+        var saved = null;
+        try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        applyTheme(saved || (prefersDark ? "dark" : "light"));
+    }
+
+    window.toggleShopTrackrTheme = function () {
+        var next = root.classList.contains("dark") ? "light" : "dark";
+        applyTheme(next);
+        try { localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
+    };
+
+    function updateClock() {
+        var now = new Date();
+        var hours = now.getHours();
+        var mins = String(now.getMinutes()).padStart(2, "0");
+        var period = hours >= 12 ? "PM" : "AM";
+        var h12 = hours % 12 || 12;
+
+        var clockEl = document.getElementById("welcomeClock");
+        if (clockEl) clockEl.textContent = h12 + ":" + mins + " " + period;
+
+        var dateEl = document.getElementById("welcomeDate");
+        if (dateEl) {
+            dateEl.textContent = now.toLocaleDateString(undefined, {
+                weekday: "long",
+                month: "long",
+                day: "numeric"
+            });
+        }
+
+        var greetingEl = document.getElementById("welcomeGreeting");
+        if (greetingEl) {
+            var greeting = hours < 12 ? "Good Morning" : hours < 17 ? "Good Afternoon" : "Good Evening";
+            var emoji = hours < 12 ? "👋" : hours < 17 ? "☀️" : "🌙";
+            greetingEl.textContent = greeting + " " + emoji;
+        }
+    }
+
+    initTheme();
+    updateClock();
+    setInterval(updateClock, 30000);
+})();
+</script>
 
 <!-- =========================================================
      JAVASCRIPT
