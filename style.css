@@ -402,6 +402,29 @@ html.dark .theme-toggle .track::after {
     transform: translateX(13px);
 }
 
+.mobile-menu-toggle { display: none; } /* invisible on desktop */
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle { display: flex; } /* show the 3 bars */
+
+  .navigation {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height .2s, opacity .2s;
+  }
+
+  .navigation.open {
+    max-height: 70vh;   /* reveals the menu */
+    opacity: 1;
+  }
+
+  /* turns the 3 bars into an X when open */
+  .mobile-menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mobile-menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .mobile-menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
 
 /* =========================================================
    MAIN
@@ -2327,4 +2350,129 @@ tbody tr:last-child td {
         margin: 12mm;
     }
 
+}
+
+/* =========================================================
+   INVOICE PRINT FIX
+   ========================================================= */
+
+@media print {
+
+    /* Remove browser/page spacing */
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: auto;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+        overflow: visible !important;
+    }
+
+    /* Hide EVERYTHING by default */
+    body * {
+        visibility: hidden !important;
+    }
+
+    /* Show ONLY the invoice */
+    #invoiceContent,
+    #invoiceContent * {
+        visibility: visible !important;
+    }
+
+    /* Put invoice at the absolute top-left */
+    #invoiceContent {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+
+        width: 100% !important;
+        max-width: none !important;
+
+        margin: 0 !important;
+        padding: 12mm !important;
+
+        box-sizing: border-box !important;
+
+        background: #fff !important;
+        color: #000 !important;
+
+        box-shadow: none !important;
+        border: none !important;
+
+        page-break-before: auto !important;
+        page-break-after: auto !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* Prevent modal/backdrop from creating another page */
+    #invoiceModal {
+        position: static !important;
+        display: block !important;
+
+        width: auto !important;
+        height: auto !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        background: transparent !important;
+        overflow: visible !important;
+    }
+
+    #invoiceModal .modal,
+    #invoiceModal .modal-content,
+    #invoiceModal .modal-body {
+        position: static !important;
+
+        width: auto !important;
+        max-width: none !important;
+        height: auto !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+
+    /* Hide invoice modal controls */
+    #invoiceModal button,
+    #invoiceModal .modal-header,
+    #invoiceModal .modal-footer,
+    .no-print,
+    .print-hidden {
+        display: none !important;
+    }
+
+    /* Make sure invoice elements don't force unnecessary pages */
+    #invoiceContent,
+    #invoiceContent table,
+    #invoiceContent tr,
+    #invoiceContent td,
+    #invoiceContent th {
+        page-break-inside: avoid !important;
+    }
+
+    /* Remove unwanted spacing */
+    #invoiceContent h1,
+    #invoiceContent h2,
+    #invoiceContent h3,
+    #invoiceContent p {
+        margin-top: 0;
+    }
+
+    /* Ensure colors/backgrounds print correctly */
+    #invoiceContent,
+    #invoiceContent * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
 }

@@ -34,13 +34,17 @@
     ========================== -->
 
     <aside class="sidebar">
+    <div class="sidebar-top">
+  <div class="logo">Shop<span>Trackr</span></div>
 
-        <div class="logo">
-            Shop<span>Trackr</span>
-        </div>
+  <button id="mobileMenuToggle" class="mobile-menu-toggle"
+          onclick="toggleMobileMenu()" aria-expanded="false">
+    <span>-</span><span>-</span><span>-</span>
+  </button>
+</div>
 
 
-        <nav class="navigation">
+        <nav class="navigation" id="mainNavigation">
 
             <button class="nav-btn active-nav"
                 onclick="showPage('dashboard', this)">
@@ -502,6 +506,10 @@
                         Dozen
                     </option>
 
+                    <option value="pounds">
+                        Pounds
+                    </option>
+
                 </select>
 
 
@@ -572,7 +580,7 @@
                     type="number"
                     min="0"
                     step="0.01"
-                    placeholder="Opening Quantity"
+                    placeholder=" Quantity"
                 >
 
 

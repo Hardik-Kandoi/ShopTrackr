@@ -225,6 +225,15 @@ function showPage(page, btn) {
     }
 }
 
+function toggleMobileMenu(forceState) {
+  const nav = document.getElementById("mainNavigation");
+  const toggle = document.getElementById("mobileMenuToggle");
+  const shouldOpen = typeof forceState === "boolean" ? forceState : !nav.classList.contains("open");
+
+  nav.classList.toggle("open", shouldOpen);
+  toggle.classList.toggle("open", shouldOpen);
+}
+
 
 /* =========================================================
    DATE HELPERS
@@ -3113,7 +3122,12 @@ function showInvoice(id) {
 
 
 function printInvoice() {
-    if (!currentInvoiceId) return;
+    const invoice = document.getElementById("invoiceContent");
+
+    if (!invoice) {
+        showToast("Invoice not found.", "error");
+        return;
+    }
 
     window.print();
 }
@@ -3125,13 +3139,18 @@ function printInvoice() {
 */
 
 function downloadInvoicePDF() {
-    showToast(
-        'Use "Save as PDF" in the browser print dialog'
-    );
+    const invoice = document.getElementById("invoiceContent");
+
+    if (!invoice) {
+        showToast("Invoice not found.", "error");
+        return;
+    }
+
+    showToast("In the print window, choose 'Save as PDF'.", "info");
 
     setTimeout(() => {
-        printInvoice();
-    }, 400);
+        window.print();
+    }, 150);
 }
 
 
