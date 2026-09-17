@@ -197,7 +197,33 @@ function closeModal(id) {
    NAVIGATION
 ========================================================= */
 
+function toggleMobileMenu(forceState) {
+    const nav = document.getElementById("mainNavigation");
+    const toggle = document.getElementById("mobileMenuToggle");
+    const backdrop = document.getElementById("mobileNavBackdrop");
+
+    if (!nav || !toggle) return;
+
+    const shouldOpen = typeof forceState === "boolean"
+        ? forceState
+        : !nav.classList.contains("open");
+
+    nav.classList.toggle("open", shouldOpen);
+    toggle.setAttribute("aria-expanded", String(shouldOpen));
+
+    if (backdrop) {
+        backdrop.classList.toggle("show", shouldOpen);
+    }
+
+    document.body.classList.toggle("nav-lock", shouldOpen);
+}
+
 function showPage(page, btn) {
+    // Auto-close the mobile hamburger menu whenever a section is chosen
+    if (window.innerWidth <= 768) {
+        toggleMobileMenu(false);
+    }
+
     document.querySelectorAll(".page").forEach(section => {
         section.classList.remove("active");
     });
@@ -223,15 +249,6 @@ function showPage(page, btn) {
     if (page === "reports") {
         renderReports();
     }
-}
-
-function toggleMobileMenu(forceState) {
-  const nav = document.getElementById("mainNavigation");
-  const toggle = document.getElementById("mobileMenuToggle");
-  const shouldOpen = typeof forceState === "boolean" ? forceState : !nav.classList.contains("open");
-
-  nav.classList.toggle("open", shouldOpen);
-  toggle.classList.toggle("open", shouldOpen);
 }
 
 
@@ -3122,12 +3139,7 @@ function showInvoice(id) {
 
 
 function printInvoice() {
-    const invoice = document.getElementById("invoiceContent");
-
-    if (!invoice) {
-        showToast("Invoice not found.", "error");
-        return;
-    }
+    if (!currentInvoiceId) return;
 
     window.print();
 }
@@ -3139,18 +3151,13 @@ function printInvoice() {
 */
 
 function downloadInvoicePDF() {
-    const invoice = document.getElementById("invoiceContent");
-
-    if (!invoice) {
-        showToast("Invoice not found.", "error");
-        return;
-    }
-
-    showToast("In the print window, choose 'Save as PDF'.", "info");
+    showToast(
+        'Use "Save as PDF" in the browser print dialog'
+    );
 
     setTimeout(() => {
-        window.print();
-    }, 150);
+        printInvoice();
+    }, 400);
 }
 
 

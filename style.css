@@ -402,27 +402,109 @@ html.dark .theme-toggle .track::after {
     transform: translateX(13px);
 }
 
-.mobile-menu-toggle { display: none; } /* invisible on desktop */
+/* SIDEBAR TOP ROW */
+.sidebar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
+/* HAMBURGER — 3 bars, no X, hover animation */
+.mobile-menu-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: transparent;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0;
+    transition: background .15s, border-color .15s, transform .15s;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: #333;
+    transition: transform .15s, width .15s, background .15s;
+}
+
+.mobile-menu-toggle:hover {
+    background: #f0f4ff;
+    border-color: #6366f1;
+    transform: scale(1.05);
+}
+
+.mobile-menu-toggle:hover span { background: #6366f1; }
+.mobile-menu-toggle:hover span:nth-child(1) { transform: translateX(2px); width: 22px; }
+.mobile-menu-toggle:hover span:nth-child(2) { width: 16px; }
+.mobile-menu-toggle:hover span:nth-child(3) { transform: translateX(-2px); width: 22px; }
+.mobile-menu-toggle:active { transform: scale(0.95); }
+
+/* BACKDROP */
+.mobile-nav-backdrop { display: none; }
+
+/* MOBILE-ONLY BEHAVIOR */
 @media (max-width: 768px) {
-  .mobile-menu-toggle { display: flex; } /* show the 3 bars */
 
-  .navigation {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height .2s, opacity .2s;
-  }
+    .mobile-menu-toggle { display: flex; }
 
-  .navigation.open {
-    max-height: 70vh;   /* reveals the menu */
-    opacity: 1;
-  }
+    .navigation {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        margin-top: 0;
+        transition: max-height .2s, opacity .2s, margin-top .2s;
+    }
 
-  /* turns the 3 bars into an X when open */
-  .mobile-menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .mobile-menu-toggle.open span:nth-child(2) { opacity: 0; }
-  .mobile-menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .navigation.open {
+        max-height: 70vh;
+        overflow-y: auto;
+        opacity: 1;
+        margin-top: 12px;
+    }
+
+    .navigation.open .nav-btn {
+        animation: navItemIn .25s ease both;
+    }
+
+    .navigation.open .nav-btn:nth-child(1) { animation-delay: .02s; }
+    .navigation.open .nav-btn:nth-child(2) { animation-delay: .04s; }
+    .navigation.open .nav-btn:nth-child(3) { animation-delay: .06s; }
+    .navigation.open .nav-btn:nth-child(4) { animation-delay: .08s; }
+    .navigation.open .nav-btn:nth-child(5) { animation-delay: .10s; }
+    .navigation.open .nav-btn:nth-child(6) { animation-delay: .12s; }
+    .navigation.open .nav-btn:nth-child(7) { animation-delay: .14s; }
+    .navigation.open .nav-btn:nth-child(8) { animation-delay: .16s; }
+
+    @keyframes navItemIn {
+        from { opacity: 0; transform: translateY(-6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .mobile-nav-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.35);
+        z-index: 400;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .2s;
+    }
+
+    .mobile-nav-backdrop.show { opacity: 1; pointer-events: auto; }
+
+    body.nav-lock { overflow: hidden; }
 }
 
 
